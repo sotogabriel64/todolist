@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do</title>
+</head>
+<body>
+    <h1>Your Todos</h1>
+    <ul id="todoList">
+
+    </ul>
+    <form action="#" id="newTodoForm">
+        <label for="task">Task: </label>
+        <input type="text" name="task" id="task" autofocus>
+        <input type="submit" value="Add Todo">
+    </form>
+    <script src="todo.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+  let todoForm = document.getElementById("newTodoForm");
+  let todoList = document.getElementById("todoList");
+
+  todoForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let removeButton = document.createElement("button");
+    removeButton.innerText = "X";
+
+    let newTodo = document.createElement("li");
+    newTodo.innerText = document.getElementById("task").value;
+
+    todoList.appendChild(newTodo);
+    newTodo.appendChild(removeButton);
+
+    todoForm.reset();
+  });
+
+  todoList.addEventListener("click", function(event) {
+    const targetTagToLowerCase = event.target.tagName.toLowerCase();
+    if (targetTagToLowerCase === "li") {
+      event.target.style.textDecoration = "line-through";
+    } else if (targetTagToLowerCase === "button") {
+      event.target.parentNode.remove();
+    }
+  });
+});
+    </script>
+</body>
+</html>
